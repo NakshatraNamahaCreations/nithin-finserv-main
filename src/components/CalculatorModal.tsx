@@ -61,24 +61,13 @@ export default function CalculatorModal({ calc, onClose }: { calc: CalcDef; onCl
 }
 
 function Field({ field, value, onChange }: { field: FieldDef; value: number | string; onChange: (v: number | string) => void }) {
-  // ── ₹ amount: manual entry with words below ──
+  // ── ₹ amount: manual entry with words below (no min/max restrictions) ──
   if (field.type === "slider" && field.prefix === "₹") {
     const numValue = Number(value) || 0;
-    const max = field.max != null ? Number(field.max) : Infinity;
-    const min = field.min != null ? Number(field.min) : 0;
-    const overMax = field.max != null && numValue > max;
-    const underMin = field.min != null && numValue > 0 && numValue < min;
 
     return (
       <div>
-        <div className="flex justify-between items-center text-[12.5px] font-medium text-navy mb-2">
-          <span>{field.label}</span>
-          {field.min != null && field.max != null && (
-            <span className="text-[10.5px] text-gray">
-              Range: ₹{Number(field.min).toLocaleString("en-IN")} – ₹{Number(field.max).toLocaleString("en-IN")}
-            </span>
-          )}
-        </div>
+        <div className="text-[12.5px] font-medium text-navy mb-2">{field.label}</div>
         <div className="relative group">
           <span className="absolute left-3.5 top-1/2 -translate-y-1/2 text-teal font-serif font-bold text-[15px] pointer-events-none">₹</span>
           <input
@@ -87,16 +76,10 @@ function Field({ field, value, onChange }: { field: FieldDef; value: number | st
             value={numValue ? numValue.toLocaleString("en-IN") : ""}
             onChange={(e) => {
               const cleaned = e.target.value.replace(/[^0-9]/g, "");
-              const n = cleaned ? Number(cleaned) : 0;
-              // clamp to max as user types so they can't exceed the limit
-              onChange(Math.min(n, max));
-            }}
-            onBlur={() => {
-              // on blur, clamp to min if a value is present
-              if (numValue > 0 && numValue < min) onChange(min);
+              onChange(cleaned ? Number(cleaned) : 0);
             }}
             placeholder="Enter amount"
-            className={`w-full pl-8 pr-3.5 py-3 border-[1.5px] rounded-[10px] text-[15px] font-semibold text-navy outline-none transition-colors bg-white ${underMin ? "border-gold focus:border-gold" : "border-border focus:border-teal"}`}
+            className="w-full pl-8 pr-3.5 py-3 border-[1.5px] border-border focus:border-teal rounded-[10px] text-[15px] font-semibold text-navy outline-none transition-colors bg-white"
           />
         </div>
         {numValue > 0 && (
@@ -105,9 +88,6 @@ function Field({ field, value, onChange }: { field: FieldDef; value: number | st
             <span className="capitalize">{numberToIndianWords(numValue).toLowerCase()}</span>
             <span className="text-gray font-normal">rupees</span>
           </div>
-        )}
-        {overMax && (
-          <div className="mt-1.5 text-[10.5px] text-red">Max allowed: ₹{max.toLocaleString("en-IN")}</div>
         )}
       </div>
     );
@@ -130,14 +110,7 @@ function Field({ field, value, onChange }: { field: FieldDef; value: number | st
 
     return (
       <div>
-        <div className="flex justify-between items-center text-[12.5px] font-medium text-navy mb-2">
-          <span>{field.label}</span>
-          {field.min != null && field.max != null && (
-            <span className="text-[10.5px] text-gray">
-              Range: {field.min} – {field.max} {unit}
-            </span>
-          )}
-        </div>
+        <div className="text-[12.5px] font-medium text-navy mb-2">{field.label}</div>
         <div className="relative">
           <input
             type="number"

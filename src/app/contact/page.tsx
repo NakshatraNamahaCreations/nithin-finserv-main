@@ -64,14 +64,14 @@ export default function ContactPage() {
               />
             </div>
 
-            <div className="mt-10 bg-white border border-border rounded-[14px] p-6">
+            {/* <div className="mt-10 bg-white border border-border rounded-[14px] p-6">
               <div className="text-[15px] font-semibold text-navy mb-2">📌 Important to know</div>
               <ul className="space-y-2 text-[12.5px] text-gray leading-[1.7] list-disc list-inside">
                 <li>Nithin Finserv is an <strong className="text-navy">AMFI Registered MFD (ARN: 307760)</strong> — not a SEBI Registered Investment Adviser.</li>
                 <li>Consultations are <strong className="text-navy">free</strong>. We earn trail commission from AMCs per SEBI norms.</li>
                 <li>Mutual Fund investments are subject to market risks. Read all scheme-related documents carefully.</li>
               </ul>
-            </div>
+            </div> */}
           </div>
 
           {/* RIGHT — form */}

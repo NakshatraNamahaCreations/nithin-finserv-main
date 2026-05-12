@@ -7,6 +7,8 @@ import { useRouter } from "next/navigation";
 const INTEREST_OPTIONS = ["Mutual funds / SIP", "ELSS tax saving", "Retirement planning", "Child education", "Health insurance", "Bonds / FDs", "Portfolio review"];
 const BUDGET_OPTIONS = ["Below ₹5,000", "₹5,000 – ₹15,000", "₹15,000 – ₹50,000", "Above ₹50,000"];
 
+const API_BASE = process.env.NEXT_PUBLIC_API_BASE_URL ?? "https://nithin-finserv-main.vercel.app";
+
 export default function ContactForm() {
   const router = useRouter();
   const [submitting, setSubmitting] = useState(false);
@@ -27,7 +29,7 @@ export default function ContactForm() {
     };
 
     try {
-      const res = await fetch("/api/contact", {
+      const res = await fetch(`${API_BASE}/api/contact`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),

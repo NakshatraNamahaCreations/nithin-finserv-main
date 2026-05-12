@@ -21,13 +21,13 @@
   .subpage-sub { @apply text-[13.5px] text-white/50 leading-[1.7]; }
   .subpage-body { @apply px-6 lg:px-12 py-14; }
   .sp-h2 { @apply font-serif text-[1.2rem] font-bold text-navy mb-2 pb-1.5 border-b-2 border-light; }
-  .sp-p { @apply text-[13px] text-gray leading-[1.8] mb-2; }
+  .sp-p { @apply text-[15px] text-gray leading-[1.8] mb-2; }
   .sp-ul { @apply list-none p-0 mb-2; }
-  .sp-ul li { @apply text-[12.5px] text-gray leading-[1.7] py-1 pl-5 relative; }
-  .sp-ul li::before { content: "→"; @apply absolute left-0 text-teal text-[10.5px] top-1.5; }
+  .sp-ul li { @apply text-[15px] text-gray leading-[1.7] py-1 pl-5 relative; }
+  .sp-ul li::before { content: "→"; @apply absolute left-0 text-teal text-[12px] top-2; }
   .sp-highlight { @apply bg-cream rounded-lg p-4 mb-3.5; }
-  .sp-highlight strong { @apply block text-navy text-[13px] mb-0.5; }
-  .sp-highlight p { @apply text-[12px] text-gray; }
+  .sp-highlight strong { @apply block text-navy text-[15px] mb-1; }
+  .sp-highlight p { @apply text-[15px] text-gray; }
   .disc-box { @apply bg-[#fff8e5] border border-[#ead98a] rounded-lg p-4 text-[12.5px] text-[#6b4e00] leading-[1.7] my-4; }
 }
 

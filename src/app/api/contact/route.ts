@@ -6,6 +6,21 @@ import nodemailer from "nodemailer";
 
 export const runtime = "nodejs";
 
+const CORS_HEADERS: Record<string, string> = {
+  "Access-Control-Allow-Origin": "*",
+  "Access-Control-Allow-Methods": "POST, OPTIONS",
+  "Access-Control-Allow-Headers": "Content-Type",
+  "Access-Control-Max-Age": "86400",
+};
+
+function jsonWithCors(body: unknown, init?: { status?: number }) {
+  return NextResponse.json(body, { status: init?.status ?? 200, headers: CORS_HEADERS });
+}
+
+export async function OPTIONS() {
+  return new NextResponse(null, { status: 204, headers: CORS_HEADERS });
+}
+
 interface ContactPayload {
   name?: string;
   mobile?: string;
@@ -23,13 +38,13 @@ export async function POST(req: Request) {
   try {
     payload = (await req.json()) as ContactPayload;
   } catch {
-    return NextResponse.json({ ok: false, error: "Invalid JSON" }, { status: 400 });
+    return jsonWithCors({ ok: false, error: "Invalid JSON" }, { status: 400 });
   }
 
   const name = (payload.name ?? "").trim();
   const mobile = (payload.mobile ?? "").trim();
   if (!name || !mobile) {
-    return NextResponse.json({ ok: false, error: "Name and mobile are required" }, { status: 400 });
+    return jsonWithCors({ ok: false, error: "Name and mobile are required" }, { status: 400 });
   }
 
   const {
@@ -39,7 +54,7 @@ export async function POST(req: Request) {
 
   if (!SMTP_HOST || !SMTP_PORT || !SMTP_USER || !SMTP_PASS || !CONTACT_TO) {
     console.error("Missing SMTP env vars. See .env.local.example for the full list.");
-    return NextResponse.json({ ok: false, error: "Email service is not configured." }, { status: 500 });
+    return jsonWithCors({ ok: false, error: "Email service is not configured." }, { status: 500 });
   }
 
   const transporter = nodemailer.createTransport({
@@ -91,8 +106,8 @@ export async function POST(req: Request) {
     });
   } catch (err) {
     console.error("Nodemailer send failed:", err);
-    return NextResponse.json({ ok: false, error: "Failed to send email." }, { status: 502 });
+    return jsonWithCors({ ok: false, error: "Failed to send email." }, { status: 502 });
   }
 
-  return NextResponse.json({ ok: true });
+  return jsonWithCors({ ok: true });
 }

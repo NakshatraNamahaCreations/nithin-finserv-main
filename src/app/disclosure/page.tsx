@@ -18,14 +18,14 @@ export default function DisclosurePage() {
             <h2 className="sp-h2">Registration details</h2>
             <div className="sp-highlight"><strong>AMFI Registration Number</strong><p>ARN: 307760</p></div>
             <div className="sp-highlight"><strong>NISM Certification</strong><p>NISM Series V-A: Mutual Fund Distributors</p></div>
-            <div className="sp-highlight"><strong>EUIN</strong><p>EXXXXXX (Employee Unique Identification Number)</p></div>
-            <div className="sp-highlight"><strong>Validity</strong><p>Current and active per AMFI records</p></div>
+            <div className="sp-highlight"><strong>EUIN</strong><p>E584422 (Employee Unique Identification Number)</p></div>
+            <div className="sp-highlight"><strong>Validity</strong><p>TILL 11 SEP 2027</p></div>
           </section>
 
           <section className="mb-9">
             <h2 className="sp-h2">Commission disclosure</h2>
-            <p className="sp-p">Nithin Finserv receives trail commission from Asset Management Companies (AMCs) as per SEBI regulations. Commission rates vary by scheme and AMC — typically 0.05% to 1.25% per annum on assets under our distribution.</p>
-            <p className="sp-p">Detailed commission for any specific scheme will be disclosed on request as required under SEBI (Mutual Funds) Regulations and AMFI Code of Conduct.</p>
+            {/* <p className="sp-p">Nithin Finserv receives trail commission from Asset Management Companies (AMCs) as per SEBI regulations. Commission rates vary by scheme and AMC — typically 0.05% to 1.25% per annum on assets under our distribution.</p> */}
+            <p className="sp-p">Nithin Finserv receives trail commission from Asset Management Companies (AMCs) as per SEBI regulations. Commission rates vary by scheme and AMC</p>
           </section>
 
           <section className="mb-9">
