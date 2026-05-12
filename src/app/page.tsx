@@ -505,7 +505,7 @@ function FeatureShowcase() {
 
         <div className="space-y-3">
           <BenefitRow icon={<FiBriefcase size={18} />} big="40+" label="AMC partners" sub="HDFC, ICICI, SBI, Axis…" />
-          <BenefitRow icon={<FiTrendingUp size={18} />} big="₹500" label="Minimum SIP / month" sub="Start small, grow steady" />
+          <BenefitRow icon={<FiTrendingUp size={18} />} big="₹100" label="Minimum SIP / month" sub="Start small, grow steady" />
           <BenefitRow icon={<FiSmartphone size={18} />} big="100%" label="Paperless digital KYC" sub="Aadhaar + PAN, instant" />
           <BenefitRow icon={<FiTarget size={18} />} big="20+" label="Goal calculators" sub="SIP, retirement, more" />
         </div>
