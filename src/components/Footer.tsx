@@ -42,7 +42,7 @@ export default function Footer() {
 
         <div className="flex flex-wrap justify-between items-start gap-5">
           <p className="text-[11px] text-white/30 leading-[1.7] max-w-[660px]">
-            <strong>Mutual Fund investments are subject to market risks. Read all scheme related documents carefully before investing.</strong> Nithin Finserv is an AMFI Registered Mutual Fund Distributor (ARN: 307760) — not a SEBI Registered Investment Adviser. We do not provide investment advice as defined under SEBI (Investment Advisers) Regulations, 2013. Past performance is not indicative of future results.
+            <strong>Mutual Fund investments are subject to market risks. Read all scheme related documents carefully before investing.</strong> Nithin Finserv is an AMFI Registered Mutual Fund Distributor (ARN: 307760). Past performance is not indicative of future results.
           </p>
           <p className="text-[10.5px] text-teal text-right whitespace-nowrap">© 2026 Nithin Finserv</p>
         </div>
