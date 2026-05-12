@@ -35,7 +35,7 @@ export default function Nav() {
             <li key={l.href}>
               <Link
                 href={l.href}
-                className={`text-[12.5px] font-medium transition-colors ${active ? "text-teal" : "text-gray hover:text-teal"}`}
+                className={`text-[15px] font-medium transition-colors ${active ? "text-teal" : "text-gray hover:text-teal"}`}
               >
                 {l.label}
               </Link>
