@@ -14,7 +14,18 @@ import {
 
 type Tab = "new" | "manage" | "seo";
 
-const CATS = ["SIP & Investing", "Tax Saving", "Market Update", "Insurance", "Retirement", "Beginners Guide"];
+const CATS = [
+  "SIP & Investing",
+  "Mutual Funds",
+  "Tax Saving",
+  "Retirement",
+  "Insurance",
+  "Personal Finance",
+  "Goal Planning",
+  "Loans & EMI",
+  "Market Update",
+  "Beginners Guide",
+];
 
 type Draft = Omit<BlogPost, "id" | "date">;
 
@@ -340,6 +351,17 @@ function BlogForm({
             <img src={draft.image} alt="preview" className="mt-3 w-32 h-20 object-cover rounded-md border border-border" />
           )}
         </div>
+      </div>
+
+      <div className="mb-5 max-w-[340px]">
+        <div className="text-[13px] font-semibold text-navy mb-2">Category</div>
+        <select
+          value={draft.cat}
+          onChange={(e) => setDraft({ ...draft, cat: e.target.value })}
+          className="w-full px-3.5 py-2.5 border border-border focus:border-teal rounded-[7px] text-[13px] text-navy outline-none transition-colors bg-white"
+        >
+          {CATS.map((c) => <option key={c} value={c}>{c}</option>)}
+        </select>
       </div>
 
       <div className="mb-5">
