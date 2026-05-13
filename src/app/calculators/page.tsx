@@ -1,11 +1,10 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 import { CALCS, type CalcCategory, type CalcDef } from "@/lib/calcs";
-import CalculatorModal from "@/components/CalculatorModal";
 
 export default function CalculatorsPage() {
-  const [active, setActive] = useState<CalcDef | null>(null);
   const [query, setQuery] = useState("");
   const [cat, setCat] = useState<CalcCategory | "all">("all");
 
@@ -94,17 +93,15 @@ export default function CalculatorsPage() {
       {/* Grids */}
       <div className="max-w-[1200px] mx-auto px-6 lg:px-8 mt-8 pb-16">
         <SectionHeading dotClass="bg-teal" title="Investment Calculators" sub={`${filtered.filter((c) => c.cat === "invest").length} of 17`} />
-        <Grid items={filtered.filter((c) => c.cat === "invest")} onOpen={setActive} />
+        <Grid items={filtered.filter((c) => c.cat === "invest")} />
 
         <SectionHeading dotClass="bg-legal" title="Legal & Tax Calculators" sub={`${filtered.filter((c) => c.cat === "legal").length} of 3`} />
-        <Grid items={filtered.filter((c) => c.cat === "legal")} onOpen={setActive} />
+        <Grid items={filtered.filter((c) => c.cat === "legal")} />
 
         <p className="text-[11px] text-gray border-t border-border pt-5 mt-4 leading-[1.7]">
           ⚠️ <strong>Disclaimer:</strong> All calculators are for illustration and educational purposes only. Mutual Fund investments are subject to market risks. Returns shown are based on assumed rates and may differ from actual performance. Past performance is not indicative of future results. Read all scheme-related documents carefully before investing. Nithin Finserv is an AMFI Registered Mutual Fund Distributor (ARN: 307760) — not a SEBI Registered Investment Adviser.
         </p>
       </div>
-
-      {active && <CalculatorModal calc={active} onClose={() => setActive(null)} />}
     </>
   );
 }
@@ -144,16 +141,16 @@ function SectionHeading({ dotClass, title, sub }: { dotClass: string; title: str
   );
 }
 
-function Grid({ items, onOpen }: { items: CalcDef[]; onOpen: (c: CalcDef) => void }) {
+function Grid({ items }: { items: CalcDef[] }) {
   if (items.length === 0) {
     return <p className="text-xs text-gray mb-10">No calculators match your search.</p>;
   }
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-10">
       {items.map((c) => (
-        <button
+        <Link
           key={c.id}
-          onClick={() => onOpen(c)}
+          href={`/calculators/${c.slug}`}
           className="text-left bg-white border-[1.5px] border-border rounded-[14px] overflow-hidden cursor-pointer transition-all flex flex-col hover:border-teal hover:-translate-y-1 hover:shadow-[0_10px_30px_rgba(16,185,129,0.1)]"
         >
           <div className="h-[100px] flex items-center justify-center relative" style={{ background: c.bg }}>
@@ -176,7 +173,7 @@ function Grid({ items, onOpen }: { items: CalcDef[]; onOpen: (c: CalcDef) => voi
               </svg>
             </div>
           </div>
-        </button>
+        </Link>
       ))}
     </div>
   );

@@ -6,7 +6,6 @@ import type { IconType } from "react-icons";
 import { FiShield, FiTarget, FiSmartphone, FiEye, FiBriefcase, FiRefreshCw, FiCheck, FiPhone, FiMail, FiGlobe, FiTrendingUp, FiStar, FiUsers } from "react-icons/fi";
 import { FaWhatsapp } from "react-icons/fa";
 import { CALCS } from "@/lib/calcs";
-import CalculatorModal from "@/components/CalculatorModal";
 import ContactForm from "@/components/ContactForm";
 
 type TabKey = "mf" | "ins" | "bonds" | "pms";
@@ -83,7 +82,6 @@ export default function HomePage() {
   const [tab, setTab] = useState<TabKey>("mf");
   const [openFaq, setOpenFaq] = useState<number | null>(null);
   const [faqCat, setFaqCat] = useState<FaqCat | "all">("all");
-  const [calcOpen, setCalcOpen] = useState<string | null>(null);
 
   const previewCalcs = ["sip", "lumpsum", "ppf"].map((id) => CALCS.find((c) => c.id === id)!);
 
@@ -265,15 +263,15 @@ export default function HomePage() {
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             {previewCalcs.map((c) => (
-              <button
+              <Link
                 key={c.id}
-                onClick={() => setCalcOpen(c.id)}
+                href={`/calculators/${c.slug}`}
                 className="text-left bg-cream border border-border rounded-[13px] p-6 cursor-pointer hover:border-teal hover:-translate-y-1 hover:shadow-[0_8px_28px_rgba(16,185,129,0.08)] transition-all"
               >
                 <div className="text-[1.75rem] mb-3">{c.icon}</div>
                 <div className="text-sm font-medium text-navy mb-1">{c.name}</div>
                 <div className="text-[11.5px] text-gray leading-[1.6]">{c.desc}</div>
-              </button>
+              </Link>
             ))}
           </div>
         </div>
@@ -410,7 +408,6 @@ export default function HomePage() {
         </div>
       </section>
 
-      {calcOpen && <CalculatorModal calc={CALCS.find((c) => c.id === calcOpen)!} onClose={() => setCalcOpen(null)} />}
     </>
   );
 }

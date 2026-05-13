@@ -4,6 +4,7 @@ export type CalcCategory = "invest" | "legal";
 
 export interface CalcDef {
   id: CalcId;
+  slug: string;
   cat: CalcCategory;
   icon: string;
   name: string;
@@ -19,28 +20,28 @@ export type CalcId =
 
 export const CALCS: CalcDef[] = [
   // INVESTMENT
-  { id: "sip", cat: "invest", icon: "📈", name: "SIP Calculator", desc: "Calculate the wealth you can generate through monthly SIP investments over time.", bg: "#e5f4ee" },
-  { id: "lumpsum", cat: "invest", icon: "💰", name: "Lumpsum Calculator", desc: "Calculate the future value of your one-time lumpsum investment.", bg: "#e5f4ee" },
-  { id: "goal_lumpsum", cat: "invest", icon: "🎯", name: "Goal Planning – Lumpsum", desc: "How much should you invest once to achieve a financial goal?", bg: "#e5f4ee" },
-  { id: "goal_sip", cat: "invest", icon: "🗓️", name: "Goal Planning – SIP", desc: "How much should you invest monthly/annually to reach your target?", bg: "#e5f4ee" },
-  { id: "time_onetime", cat: "invest", icon: "⏱️", name: "Time Duration – One Time", desc: "How long will it take for your one-time investment to reach your goal?", bg: "#e5f4ee" },
-  { id: "time_sip", cat: "invest", icon: "⌛", name: "Time Duration – SIP", desc: "How long will it take your regular SIP to reach the target amount?", bg: "#e5f4ee" },
-  { id: "retirement", cat: "invest", icon: "🏡", name: "Retirement Planning", desc: "Calculate the investment needed to build your retirement corpus.", bg: "#e5f4ee" },
-  { id: "investment_planner", cat: "invest", icon: "📊", name: "Investment Planner", desc: "What % of your salary should you invest in equity? Find the ideal amount.", bg: "#e5f4ee" },
-  { id: "mf_vs_fd", cat: "invest", icon: "⚖️", name: "MF vs FD Returns", desc: "Compare returns between mutual fund investments and fixed deposits.", bg: "#e5f4ee" },
-  { id: "child_education", cat: "invest", icon: "🎓", name: "Child Education Planner", desc: "How much should you save monthly to fund your child's education?", bg: "#e5f4ee" },
-  { id: "stepup", cat: "invest", icon: "🚀", name: "Step-Up SIP Calculator", desc: "Calculate returns when you increase your SIP amount every year.", bg: "#e5f4ee" },
-  { id: "dcf", cat: "invest", icon: "🔬", name: "DCF Calculator", desc: "Calculate intrinsic value of companies using Discounted Cash Flow.", bg: "#e5f4ee" },
-  { id: "emi", cat: "invest", icon: "🏦", name: "EMI Calculator", desc: "Calculate the monthly EMI on your home, car, or personal loan.", bg: "#e5f4ee" },
-  { id: "emi_edu", cat: "invest", icon: "📚", name: "Education Loan EMI", desc: "Calculate monthly EMI for your education loan post course completion.", bg: "#e5f4ee" },
-  { id: "ppf", cat: "invest", icon: "🏛️", name: "PPF Calculator", desc: "Calculate maturity amount of your Public Provident Fund investment.", bg: "#e5f4ee" },
-  { id: "fd", cat: "invest", icon: "🧾", name: "Fixed Deposit Calculator", desc: "Calculate returns on your FD at any interest rate and tenure.", bg: "#e5f4ee" },
-  { id: "rd", cat: "invest", icon: "💳", name: "Recurring Deposit Calculator", desc: "Calculate the maturity amount of your monthly RD investment.", bg: "#e5f4ee" },
+  { id: "sip", slug: "sip-calculator", cat: "invest", icon: "📈", name: "SIP Calculator", desc: "Calculate the wealth you can generate through monthly SIP investments over time.", bg: "#e5f4ee" },
+  { id: "lumpsum", slug: "lumpsum-calculator", cat: "invest", icon: "💰", name: "Lumpsum Calculator", desc: "Calculate the future value of your one-time lumpsum investment.", bg: "#e5f4ee" },
+  { id: "goal_lumpsum", slug: "goal-planning-lumpsum-calculator", cat: "invest", icon: "🎯", name: "Goal Planning – Lumpsum", desc: "How much should you invest once to achieve a financial goal?", bg: "#e5f4ee" },
+  { id: "goal_sip", slug: "goal-planning-sip-calculator", cat: "invest", icon: "🗓️", name: "Goal Planning – SIP", desc: "How much should you invest monthly/annually to reach your target?", bg: "#e5f4ee" },
+  { id: "time_onetime", slug: "time-duration-one-time-calculator", cat: "invest", icon: "⏱️", name: "Time Duration – One Time", desc: "How long will it take for your one-time investment to reach your goal?", bg: "#e5f4ee" },
+  { id: "time_sip", slug: "time-duration-sip-calculator", cat: "invest", icon: "⌛", name: "Time Duration – SIP", desc: "How long will it take your regular SIP to reach the target amount?", bg: "#e5f4ee" },
+  { id: "retirement", slug: "retirement-planning-calculator", cat: "invest", icon: "🏡", name: "Retirement Planning", desc: "Calculate the investment needed to build your retirement corpus.", bg: "#e5f4ee" },
+  { id: "investment_planner", slug: "investment-planner-calculator", cat: "invest", icon: "📊", name: "Investment Planner", desc: "What % of your salary should you invest in equity? Find the ideal amount.", bg: "#e5f4ee" },
+  { id: "mf_vs_fd", slug: "mf-vs-fd-returns-calculator", cat: "invest", icon: "⚖️", name: "MF vs FD Returns", desc: "Compare returns between mutual fund investments and fixed deposits.", bg: "#e5f4ee" },
+  { id: "child_education", slug: "child-education-planner-calculator", cat: "invest", icon: "🎓", name: "Child Education Planner", desc: "How much should you save monthly to fund your child's education?", bg: "#e5f4ee" },
+  { id: "stepup", slug: "step-up-sip-calculator", cat: "invest", icon: "🚀", name: "Step-Up SIP Calculator", desc: "Calculate returns when you increase your SIP amount every year.", bg: "#e5f4ee" },
+  { id: "dcf", slug: "dcf-calculator", cat: "invest", icon: "🔬", name: "DCF Calculator", desc: "Calculate intrinsic value of companies using Discounted Cash Flow.", bg: "#e5f4ee" },
+  { id: "emi", slug: "emi-calculator", cat: "invest", icon: "🏦", name: "EMI Calculator", desc: "Calculate the monthly EMI on your home, car, or personal loan.", bg: "#e5f4ee" },
+  { id: "emi_edu", slug: "education-loan-emi-calculator", cat: "invest", icon: "📚", name: "Education Loan EMI", desc: "Calculate monthly EMI for your education loan post course completion.", bg: "#e5f4ee" },
+  { id: "ppf", slug: "ppf-calculator", cat: "invest", icon: "🏛️", name: "PPF Calculator", desc: "Calculate maturity amount of your Public Provident Fund investment.", bg: "#e5f4ee" },
+  { id: "fd", slug: "fixed-deposit-calculator", cat: "invest", icon: "🧾", name: "Fixed Deposit Calculator", desc: "Calculate returns on your FD at any interest rate and tenure.", bg: "#e5f4ee" },
+  { id: "rd", slug: "recurring-deposit-calculator", cat: "invest", icon: "💳", name: "Recurring Deposit Calculator", desc: "Calculate the maturity amount of your monthly RD investment.", bg: "#e5f4ee" },
   // LEGAL & TAX
-  { id: "compound", cat: "legal", icon: "📐", name: "Compound Interest Calculator", desc: "Calculate compound interest on your savings for any period.", bg: "#eeecfe" },
-  { id: "cagr", cat: "legal", icon: "📉", name: "CAGR Calculator", desc: "Calculate your Compounded Annual Growth Rate on any investment.", bg: "#eeecfe" },
-  { id: "gst", cat: "legal", icon: "🧾", name: "GST Calculator", desc: "Quickly calculate GST amount payable or included in any price.", bg: "#eeecfe" },
-  { id: "gratuity", cat: "legal", icon: "👔", name: "Gratuity Calculator", desc: "Calculate the gratuity amount payable by your employer on resignation/retirement.", bg: "#eeecfe" },
+  { id: "compound", slug: "compound-interest-calculator", cat: "legal", icon: "📐", name: "Compound Interest Calculator", desc: "Calculate compound interest on your savings for any period.", bg: "#eeecfe" },
+  { id: "cagr", slug: "cagr-calculator", cat: "legal", icon: "📉", name: "CAGR Calculator", desc: "Calculate your Compounded Annual Growth Rate on any investment.", bg: "#eeecfe" },
+  { id: "gst", slug: "gst-calculator", cat: "legal", icon: "🧾", name: "GST Calculator", desc: "Quickly calculate GST amount payable or included in any price.", bg: "#eeecfe" },
+  { id: "gratuity", slug: "gratuity-calculator", cat: "legal", icon: "👔", name: "Gratuity Calculator", desc: "Calculate the gratuity amount payable by your employer on resignation/retirement.", bg: "#eeecfe" },
 ];
 
 // ── Field definitions per calculator ──

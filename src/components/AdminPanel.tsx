@@ -128,7 +128,7 @@ export default function AdminPanel() {
           </Field>
 
           <button onClick={tryLogin} className="w-full bg-teal hover:bg-teal-2 text-white py-3 rounded-[7px] text-[13px] font-medium transition-colors mt-2">Login →</button>
-          <p className="text-[11px] text-gray mt-3">Default password: <strong className="text-navy">{DEFAULT_ADMIN_PASS}</strong></p>
+          {/* <p className="text-[11px] text-gray mt-3">Default password: <strong className="text-navy">{DEFAULT_ADMIN_PASS}</strong></p> */}
         </div>
       ) : (
         <>

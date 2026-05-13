@@ -1,10 +1,10 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
-import { CALCS, FIELDS, runCalc, type CalcDef, type CalcResult, type FieldDef } from "@/lib/calcs";
+import { useMemo, useState } from "react";
+import { FIELDS, runCalc, type CalcDef, type CalcResult, type FieldDef } from "@/lib/calcs";
 import { numberToIndianWords } from "@/lib/utils";
 
-export default function CalculatorModal({ calc, onClose }: { calc: CalcDef; onClose: () => void }) {
+export default function CalculatorView({ calc }: { calc: CalcDef }) {
   const fields = FIELDS[calc.id];
   const initial = useMemo<Record<string, number | string>>(() => {
     const o: Record<string, number | string> = {};
@@ -13,58 +13,36 @@ export default function CalculatorModal({ calc, onClose }: { calc: CalcDef; onCl
   }, [fields]);
 
   const [values, setValues] = useState<Record<string, number | string>>(initial);
-
-  useEffect(() => {
-    setValues(initial);
-    document.body.style.overflow = "hidden";
-    const onKey = (e: KeyboardEvent) => { if (e.key === "Escape") onClose(); };
-    document.addEventListener("keydown", onKey);
-    return () => {
-      document.body.style.overflow = "";
-      document.removeEventListener("keydown", onKey);
-    };
-  }, [calc.id, initial, onClose]);
-
   const result = useMemo(() => runCalc(calc.id, values), [calc.id, values]);
   const update = (id: string, v: number | string) => setValues((s) => ({ ...s, [id]: v }));
 
   return (
-    <div
-      onClick={(e) => { if (e.target === e.currentTarget) onClose(); }}
-      className="fixed inset-0 z-[1500] bg-[rgba(10,20,35,0.65)] backdrop-blur-[4px] flex items-center justify-center p-4"
-    >
-      <div className="bg-white rounded-[20px] w-full max-w-[900px] max-h-[90vh] overflow-y-auto flex flex-col">
-        <div className="flex items-center justify-between px-7 pt-6 pb-4 border-b border-border sticky top-0 bg-white z-10 rounded-t-[20px]">
-          <div className="flex items-center gap-3">
-            <div className="text-[1.75rem]">{calc.icon}</div>
-            <div>
-              <div className="font-serif text-[1.2rem] font-bold text-navy">{calc.name}</div>
-              <div className="text-xs text-gray mt-0.5">{calc.desc}</div>
-            </div>
-          </div>
-          <button onClick={onClose} className="bg-cream hover:bg-red/20 hover:text-red w-[34px] h-[34px] rounded-full flex items-center justify-center text-[1.1rem] text-gray transition-all shrink-0">✕</button>
+    <div className="bg-white rounded-[20px] border border-border overflow-hidden shadow-[0_4px_24px_rgba(0,0,0,0.04)]">
+      <div className="flex items-center gap-3 px-7 pt-6 pb-4 border-b border-border">
+        <div className="text-[1.75rem]">{calc.icon}</div>
+        <div>
+          <div className="font-serif text-[1.2rem] font-bold text-navy">{calc.name}</div>
+          <div className="text-xs text-gray mt-0.5">{calc.desc}</div>
         </div>
+      </div>
 
-        <div className="grid md:grid-cols-[1fr_340px] gap-8 p-7 items-start">
-          <div className="space-y-5">
-            {fields.map((f) => <Field key={f.id} field={f} value={values[f.id]} onChange={(v) => update(f.id, v)} />)}
-          </div>
-          <ResultPanel result={result} />
+      <div className="grid md:grid-cols-[1fr_340px] gap-8 p-7 items-start">
+        <div className="space-y-5">
+          {fields.map((f) => <Field key={f.id} field={f} value={values[f.id]} onChange={(v) => update(f.id, v)} />)}
         </div>
+        <ResultPanel result={result} />
+      </div>
 
-        <div className="bg-cream border-t border-border px-7 py-4 text-[11px] text-gray leading-[1.7] rounded-b-[20px]">
-          ⚠️ <strong>Disclaimer:</strong> Results are for illustration only. Mutual Fund investments subject to market risks. Assumed returns may not reflect actual performance. Read all scheme-related documents carefully. Not investment advice.
-        </div>
+      <div className="bg-cream border-t border-border px-7 py-4 text-[11px] text-gray leading-[1.7]">
+        ⚠️ <strong>Disclaimer:</strong> Results are for illustration only. Mutual Fund investments subject to market risks. Assumed returns may not reflect actual performance. Read all scheme-related documents carefully. Not investment advice.
       </div>
     </div>
   );
 }
 
 function Field({ field, value, onChange }: { field: FieldDef; value: number | string; onChange: (v: number | string) => void }) {
-  // ── ₹ amount: manual entry with words below (no min/max restrictions) ──
   if (field.type === "slider" && field.prefix === "₹") {
     const numValue = Number(value) || 0;
-
     return (
       <div>
         <div className="text-[12.5px] font-medium text-navy mb-2">{field.label}</div>
@@ -93,7 +71,6 @@ function Field({ field, value, onChange }: { field: FieldDef; value: number | st
     );
   }
 
-  // ── rate / period / months: manual entry with unit suffix ──
   if (field.type === "slider") {
     const unit = field.unit ?? "";
     const suffixLabel =
@@ -121,11 +98,9 @@ function Field({ field, value, onChange }: { field: FieldDef; value: number | st
             onChange={(e) => {
               if (e.target.value === "") { onChange(0); return; }
               const n = Number(e.target.value);
-              // clamp to max while typing
               onChange(Math.min(n, max));
             }}
             onBlur={() => {
-              // on blur, clamp to min if a value is present
               if (current > 0 && current < min) onChange(min);
             }}
             placeholder="Enter value"
@@ -157,7 +132,6 @@ function Field({ field, value, onChange }: { field: FieldDef; value: number | st
     );
   }
 
-  // tabs
   return (
     <div>
       <div className="text-[12.5px] font-medium text-navy mb-2">{field.label}</div>
@@ -232,7 +206,6 @@ function ResultPanel({ result }: { result: CalcResult }) {
     );
   }
 
-  // simple result
   return (
     <div className="bg-navy rounded-2xl p-6 md:sticky md:top-[90px]">
       <div className="flex flex-col gap-2 mb-5">
