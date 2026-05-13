@@ -1,24 +1,25 @@
 import { NextResponse } from "next/server";
-import { promises as fs } from "fs";
-import path from "path";
-import { randomBytes } from "crypto";
+import { v2 as cloudinary, type UploadApiResponse } from "cloudinary";
 
 export const runtime = "nodejs";
 
 const MAX_BYTES = 5 * 1024 * 1024;
-const ALLOWED_EXT: Record<string, true> = {
-  png: true, jpg: true, jpeg: true, gif: true, webp: true, svg: true, avif: true,
-};
 
-function safeExt(filename: string, mime: string): string | null {
-  const fromName = filename.split(".").pop()?.toLowerCase() ?? "";
-  if (fromName && ALLOWED_EXT[fromName]) return fromName === "jpeg" ? "jpg" : fromName;
-  const fromMime = (mime.split("/")[1] ?? "").toLowerCase();
-  if (ALLOWED_EXT[fromMime]) return fromMime === "jpeg" ? "jpg" : fromMime;
-  return null;
-}
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET,
+  secure: true,
+});
 
 export async function POST(req: Request) {
+  if (!process.env.CLOUDINARY_CLOUD_NAME || !process.env.CLOUDINARY_API_KEY || !process.env.CLOUDINARY_API_SECRET) {
+    return NextResponse.json(
+      { ok: false, error: "Cloudinary is not configured. Set CLOUDINARY_CLOUD_NAME / CLOUDINARY_API_KEY / CLOUDINARY_API_SECRET." },
+      { status: 500 }
+    );
+  }
+
   let form: FormData;
   try {
     form = await req.formData();
@@ -39,19 +40,25 @@ export async function POST(req: Request) {
     return NextResponse.json({ ok: false, error: "File exceeds 5MB" }, { status: 413 });
   }
 
-  const ext = safeExt(file.name, file.type);
-  if (!ext) {
-    return NextResponse.json({ ok: false, error: "Unsupported image format" }, { status: 415 });
-  }
-
-  const uploadDir = path.join(process.cwd(), "public", "uploads");
-  await fs.mkdir(uploadDir, { recursive: true });
-
-  const name = `${Date.now()}-${randomBytes(6).toString("hex")}.${ext}`;
-  const fullPath = path.join(uploadDir, name);
-
   const buf = Buffer.from(await file.arrayBuffer());
-  await fs.writeFile(fullPath, buf);
 
-  return NextResponse.json({ ok: true, url: `/uploads/${name}` });
+  try {
+    const result = await new Promise<UploadApiResponse>((resolve, reject) => {
+      cloudinary.uploader
+        .upload_stream(
+          { folder: "nithin-finserv/blog", resource_type: "image" },
+          (err, res) => {
+            if (err || !res) reject(err ?? new Error("Cloudinary returned no response"));
+            else resolve(res);
+          }
+        )
+        .end(buf);
+    });
+
+    return NextResponse.json({ ok: true, url: result.secure_url });
+  } catch (err) {
+    console.error("Cloudinary upload failed:", err);
+    const msg = err instanceof Error ? err.message : "Upload failed";
+    return NextResponse.json({ ok: false, error: msg }, { status: 502 });
+  }
 }
