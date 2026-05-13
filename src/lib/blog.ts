@@ -7,6 +7,8 @@ export interface BlogPost {
   emoji: string;
   readTime: number;
   date: string;
+  image?: string;
+  metaTitle?: string;
   metaDesc?: string;
   keywords?: string;
 }

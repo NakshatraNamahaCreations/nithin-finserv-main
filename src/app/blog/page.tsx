@@ -41,7 +41,12 @@ function BlogList({ posts }: { posts: BlogPost[] }) {
             {posts.map((p) => (
               <Link key={p.id} href={`/blog?id=${p.id}`} className="bg-white border border-border rounded-[14px] overflow-hidden hover:border-teal hover:-translate-y-1 hover:shadow-[0_10px_30px_rgba(0,0,0,0.07)] transition-all block no-underline">
                 <div className="h-[175px] bg-light flex items-center justify-center text-[3rem] relative overflow-hidden">
-                  <span>{p.emoji || "📰"}</span>
+                  {p.image ? (
+                    // eslint-disable-next-line @next/next/no-img-element
+                    <img src={p.image} alt={p.title} className="w-full h-full object-cover" />
+                  ) : (
+                    <span>{p.emoji || "📰"}</span>
+                  )}
                   <span className="absolute top-3 left-3 bg-teal text-white text-[10px] font-medium px-2.5 py-0.5 rounded-full">{p.cat}</span>
                 </div>
                 <div className="p-5">
@@ -67,7 +72,7 @@ function SinglePost({ id, posts }: { id: string; posts: BlogPost[] }) {
   const post = posts.find((p) => String(p.id) === String(id));
 
   useEffect(() => {
-    if (post) document.title = post.title + " | Nithin Finserv";
+    if (post) document.title = (post.metaTitle?.trim() || post.title) + " | Nithin Finserv";
   }, [post]);
 
   if (posts.length === 0) {
@@ -88,7 +93,14 @@ function SinglePost({ id, posts }: { id: string; posts: BlogPost[] }) {
     <div className="bg-white px-6 lg:px-12 pt-28 pb-16">
       <div className="max-w-[800px] mx-auto">
         <button onClick={() => router.push("/blog")} className="bg-transparent border-0 text-teal text-[13px] cursor-pointer mb-6 flex items-center gap-1.5">← Back to blog</button>
-        <div className="w-full h-[280px] rounded-[14px] mb-7 bg-light flex items-center justify-center text-[4rem]">{post.emoji || "📰"}</div>
+        <div className="w-full h-[280px] rounded-[14px] mb-7 bg-light flex items-center justify-center text-[4rem] overflow-hidden">
+          {post.image ? (
+            // eslint-disable-next-line @next/next/no-img-element
+            <img src={post.image} alt={post.title} className="w-full h-full object-cover" />
+          ) : (
+            <span>{post.emoji || "📰"}</span>
+          )}
+        </div>
         <h1 className="font-serif text-[clamp(1.5rem,3vw,2rem)] font-bold text-navy mb-3 leading-[1.25]">{post.title}</h1>
         <div className="flex gap-4 flex-wrap text-xs text-gray mb-8 pb-5 border-b border-border">
           <span>📅 {post.date}</span>
