@@ -8,6 +8,7 @@ import {
   loadSettings,
   savePosts,
   saveSettings,
+  uniqueSlug,
   type AdminSettings,
   type BlogPost,
 } from "@/lib/blog";
@@ -27,7 +28,7 @@ const CATS = [
   "Beginners Guide",
 ];
 
-type Draft = Omit<BlogPost, "id" | "date">;
+type Draft = Omit<BlogPost, "id" | "date" | "slug">;
 
 const emptyDraft = (): Draft => ({
   title: "",
@@ -101,8 +102,10 @@ export default function AdminPanel() {
     }
     const today = new Date().toLocaleDateString("en-IN", { day: "numeric", month: "short", year: "numeric" });
     const excerpt = draft.excerpt?.trim() || stripHtml(draft.body).slice(0, 160);
+    const slug = uniqueSlug(draft.title, posts, editingId ?? undefined);
     const post: BlogPost = {
       id: editingId ?? Date.now(),
+      slug,
       date: editingId ? (posts.find((p) => p.id === editingId)?.date ?? today) : today,
       ...draft,
       excerpt,
@@ -460,8 +463,24 @@ function RichTextEditor({ value, onChange }: { value: string; onChange: (html: s
   };
 
   const insertLink = () => {
-    const url = window.prompt("Enter URL");
-    if (url) exec("createLink", url);
+    let url = window.prompt("Enter URL (e.g. https://example.com)")?.trim();
+    if (!url) return;
+    if (!/^(https?:|mailto:|tel:|\/|#)/i.test(url)) {
+      url = "https://" + url;
+    }
+    focusEditor();
+    const sel = window.getSelection();
+    if (sel && sel.toString().length === 0) {
+      // No text selected — insert the URL as both href and visible text.
+      document.execCommand(
+        "insertHTML",
+        false,
+        `<a href="${url}" target="_blank" rel="noopener noreferrer">${url}</a>`
+      );
+      if (ref.current) onChange(ref.current.innerHTML);
+    } else {
+      exec("createLink", url);
+    }
   };
 
   const insertImageUrl = () => {

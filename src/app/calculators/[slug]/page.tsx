@@ -2,7 +2,9 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { CALCS } from "@/lib/calcs";
+import { CALC_INFO } from "@/lib/calcInfo";
 import CalculatorView from "@/components/CalculatorView";
+import CalculatorInfo from "@/components/CalculatorInfo";
 
 export function generateStaticParams() {
   return CALCS.map((c) => ({ slug: c.slug }));
@@ -46,6 +48,8 @@ export default async function CalculatorPage({ params }: { params: Promise<{ slu
       <div className="max-w-[1200px] mx-auto px-6 lg:px-8 py-10">
         <CalculatorView calc={calc} />
       </div>
+
+      <CalculatorInfo calc={calc} info={CALC_INFO[calc.id]} />
     </>
   );
 }

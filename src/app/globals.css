@@ -36,10 +36,17 @@
 
   /* Blog body (rendered HTML) */
   .prose-blog h2 { @apply font-serif text-[1.3rem] text-navy mt-7 mb-2.5; }
+  .prose-blog h3 { @apply font-serif text-[1.1rem] text-navy mt-5 mb-2; }
+  .prose-blog h4 { @apply font-serif text-[1rem] text-navy mt-4 mb-1.5; }
   .prose-blog p { @apply mb-4; }
   .prose-blog ul { @apply pl-5 mb-4 list-disc; }
+  .prose-blog ol { @apply pl-5 mb-4 list-decimal; }
   .prose-blog li { @apply mb-1.5; }
   .prose-blog strong { @apply text-navy font-semibold; }
+  .prose-blog em { @apply italic; }
+  .prose-blog a { @apply text-teal underline underline-offset-2 hover:text-teal-2; }
+  .prose-blog blockquote { @apply border-l-4 border-teal bg-cream pl-4 py-2 my-4 italic text-gray rounded-r-md; }
+  .prose-blog img { @apply max-w-full h-auto rounded-md my-3; }
 
   /* FAQ answer (rendered HTML) */
   .faq-answer strong { @apply text-navy font-semibold; }

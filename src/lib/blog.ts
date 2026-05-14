@@ -1,5 +1,6 @@
 export interface BlogPost {
   id: number;
+  slug: string;
   title: string;
   cat: string;
   excerpt: string;
@@ -13,9 +14,28 @@ export interface BlogPost {
   keywords?: string;
 }
 
+export function slugify(s: string): string {
+  return s
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "")
+    .slice(0, 80) || "post";
+}
+
+export function uniqueSlug(title: string, posts: BlogPost[], ignoreId?: number): string {
+  const base = slugify(title);
+  let candidate = base;
+  let n = 2;
+  while (posts.some((p) => p.slug === candidate && p.id !== ignoreId)) {
+    candidate = `${base}-${n++}`;
+  }
+  return candidate;
+}
+
 export const SEED_POSTS: BlogPost[] = [
   {
     id: 1,
+    slug: "why-sip-is-the-best-way-to-start-investing-in-2026",
     title: "Why SIP is the best way to start investing in 2026",
     cat: "SIP & Investing",
     excerpt: "Systematic Investment Plans remain the most disciplined and accessible way for salaried individuals to build long-term wealth.",
@@ -28,6 +48,7 @@ export const SEED_POSTS: BlogPost[] = [
   },
   {
     id: 2,
+    slug: "elss-vs-ppf-section-80c-fy-2026-27",
     title: "ELSS vs PPF: Which is better for Section 80C in FY 2026-27?",
     cat: "Tax Saving",
     excerpt: "Both ELSS and PPF offer Section 80C benefits up to ₹1.5 lakhs. But which one should you choose? A detailed comparison.",
@@ -40,6 +61,7 @@ export const SEED_POSTS: BlogPost[] = [
   },
   {
     id: 3,
+    slug: "retirement-planning-at-30-bengaluru-professionals",
     title: "Retirement planning at 30: a practical guide for Bengaluru professionals",
     cat: "Retirement",
     excerpt: "Starting retirement planning in your 30s is the single most impactful financial decision you can make.",
@@ -66,13 +88,24 @@ export interface AdminSettings {
   email?: string;
 }
 
+function backfillSlugs(posts: BlogPost[]): BlogPost[] {
+  const out: BlogPost[] = [];
+  for (const p of posts) {
+    if (p.slug) { out.push(p); continue; }
+    const fixed = { ...p, slug: uniqueSlug(p.title || `post-${p.id}`, out) };
+    out.push(fixed);
+  }
+  return out;
+}
+
 export function loadPosts(): BlogPost[] {
   if (typeof window === "undefined") return SEED_POSTS;
   try {
     const raw = window.localStorage.getItem(STORAGE_KEY);
     if (!raw) return SEED_POSTS;
     const parsed = JSON.parse(raw) as BlogPost[];
-    return Array.isArray(parsed) && parsed.length > 0 ? parsed : SEED_POSTS;
+    if (!Array.isArray(parsed) || parsed.length === 0) return SEED_POSTS;
+    return backfillSlugs(parsed);
   } catch {
     return SEED_POSTS;
   }
