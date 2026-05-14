@@ -101,10 +101,12 @@ export default function CalculatorInfo({ calc, info }: { calc: CalcDef; info: Ca
         </div>
         */}
 
+        {/* Hidden for now — uncomment to restore Investing tips
         <div className="bg-navy rounded-md px-5 py-4 mb-7">
           <div className="text-[11px] font-semibold text-teal tracking-[0.5px] uppercase mb-1.5">Investing tips</div>
           <p className="text-[13.5px] text-white/80 leading-[1.75]">{info.tips}</p>
         </div>
+        */}
 
         <div>
           <h3 className="font-serif text-[1.15rem] font-bold text-navy mb-3">Frequently asked questions</h3>
