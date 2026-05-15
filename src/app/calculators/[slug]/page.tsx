@@ -14,9 +14,37 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const { slug } = await params;
   const calc = CALCS.find((c) => c.slug === slug);
   if (!calc) return { title: "Calculator | Nithin Finserv" };
+
+  const nameLower = calc.name.toLowerCase();
+  const title = `${calc.name} Online — Free India ${new Date().getFullYear()} | Nithin Finserv`;
+  const description = `${calc.desc} Free online ${nameLower} by AMFI Registered MFD Nithin Finserv (ARN: 307760), Bengaluru. Instant results, mobile-friendly, no signup.`;
+
   return {
-    title: `${calc.name} | Nithin Finserv`,
-    description: calc.desc,
+    title,
+    description,
+    alternates: { canonical: `/calculators/${calc.slug}` },
+    keywords: [
+      nameLower,
+      `${nameLower} online`,
+      `${nameLower} india`,
+      `free ${nameLower}`,
+      `${nameLower} 2026`,
+      "mutual fund calculator",
+      "AMFI registered MFD",
+      "nithin finserv calculator",
+    ],
+    openGraph: {
+      title,
+      description,
+      type: "website",
+      siteName: "Nithin Finserv",
+      locale: "en_IN",
+    },
+    twitter: {
+      card: "summary",
+      title: `${calc.name} | Nithin Finserv`,
+      description: calc.desc,
+    },
   };
 }
 

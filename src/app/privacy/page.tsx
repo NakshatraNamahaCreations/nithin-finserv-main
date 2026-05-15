@@ -1,4 +1,18 @@
-export const metadata = { title: "Privacy Policy | Nithin Finserv" };
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  alternates: { canonical: "/privacy" },
+  title: "Privacy Policy | Nithin Finserv",
+  description:
+    "How Nithin Finserv collects, uses and protects your personal information. Privacy practices of an AMFI Registered Mutual Fund Distributor in Bengaluru (ARN: 307760).",
+  keywords: [
+    "nithin finserv privacy policy",
+    "mutual fund distributor privacy",
+    "MFD data protection",
+    "AMFI MFD privacy",
+  ],
+  robots: { index: true, follow: true },
+};
 
 export default function PrivacyPage() {
   return (

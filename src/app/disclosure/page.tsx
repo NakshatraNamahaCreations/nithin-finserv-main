@@ -1,4 +1,19 @@
-export const metadata = { title: "Disclosures | Nithin Finserv" };
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  alternates: { canonical: "/disclosure" },
+  title: "Disclosures | AMFI Registration & Distributor Information | Nithin Finserv",
+  description:
+    "Mandatory AMFI disclosures from Nithin Finserv, ARN: 307760. Information about mutual fund distributor commissions, conflicts of interest, regulatory status, and SEBI compliance.",
+  keywords: [
+    "nithin finserv disclosures",
+    "AMFI distributor disclosures",
+    "MFD commission disclosure",
+    "ARN 307760 disclosure",
+    "mutual fund distributor regulatory disclosures",
+  ],
+  robots: { index: true, follow: true },
+};
 
 export default function DisclosurePage() {
   return (

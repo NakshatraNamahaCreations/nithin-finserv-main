@@ -6,15 +6,52 @@ import Footer from "@/components/Footer";
 import FloatingCTA from "@/components/FloatingCTA";
 import "./globals.css";
 
-const GA_ID = "G-4RZJWNXD9T";
+// const GA_ID = "G-4RZJWNXD9T";
 
 const playfair = Playfair_Display({ subsets: ["latin"], weight: ["600", "700"], variable: "--font-playfair" });
 const dmSans = DM_Sans({ subsets: ["latin"], weight: ["300", "400", "500", "600"], variable: "--font-dm-sans" });
 
 export const metadata: Metadata = {
-  title: "Nithin Finserv | AMFI Registered Mutual Fund Distributor Bengaluru | SIP ELSS Insurance",
+  metadataBase: new URL("https://nithinfinserv.com"),
+  alternates: { canonical: "/" },
+  title: {
+    default: "Nithin Finserv | AMFI Registered Mutual Fund Distributor in Bengaluru",
+    template: "%s | Nithin Finserv",
+  },
   description:
-    "Nithin Finserv — AMFI Registered MFD in Bengaluru. Start SIP from ₹500, invest in ELSS, get free portfolio review. 40+ AMC partners. ARN: 307760.",
+    "Start SIP from ₹500. Invest in mutual funds, ELSS, insurance and retirement plans with AMFI Registered MFD Nithin Finserv (ARN: 307760). 40+ AMC partners and free portfolio review in Bengaluru.",
+  keywords: [
+    "mutual fund distributor bengaluru",
+    "AMFI registered MFD",
+    "SIP investment",
+    "ELSS tax saving",
+    "best mutual funds india",
+    "free portfolio review",
+    "Nithin Finserv",
+    "ARN 307760",
+    "mutual fund consultant bengaluru",
+    "online mutual fund investment",
+    "retirement planning bengaluru",
+  ],
+  authors: [{ name: "Nithin Finserv" }],
+  creator: "Nithin Finserv",
+  publisher: "Nithin Finserv",
+  category: "Finance",
+  openGraph: {
+    type: "website",
+    siteName: "Nithin Finserv",
+    locale: "en_IN",
+    title: "Nithin Finserv | AMFI Registered Mutual Fund Distributor in Bengaluru",
+    description:
+      "Start SIP from ₹500. Mutual funds, ELSS, insurance and retirement planning with AMFI Registered MFD Nithin Finserv. 40+ AMC partners. ARN: 307760.",
+  },
+  twitter: {
+    card: "summary",
+    title: "Nithin Finserv | AMFI Registered Mutual Fund Distributor",
+    description:
+      "Start SIP from ₹500. Mutual funds, ELSS, insurance and retirement planning with AMFI Registered MFD. ARN: 307760.",
+  },
+  robots: { index: true, follow: true },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
@@ -26,7 +63,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <Footer />
         <FloatingCTA />
 
-        <Script
+        {/* <Script
           src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`}
           strategy="afterInteractive"
         />
@@ -37,7 +74,17 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             gtag('js', new Date());
             gtag('config', '${GA_ID}');
           `}
-        </Script>
+        </Script> */}
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-43RE7RE75F"></script>
+<script>
+  {`
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-43RE7RE75F');
+  `}
+</script>
       </body>
     </html>
   );

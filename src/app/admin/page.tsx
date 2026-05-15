@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import AdminPanel from "@/components/AdminPanel";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/admin" },
   title: "Admin · Nithin Finserv",
   robots: { index: false, follow: false },
 };

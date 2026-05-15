@@ -1,4 +1,18 @@
-export const metadata = { title: "Terms & Conditions | Nithin Finserv" };
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  alternates: { canonical: "/terms" },
+  title: "Terms & Conditions | Nithin Finserv",
+  description:
+    "Terms and conditions for using Nithin Finserv's website and mutual fund distribution services. AMFI Registered MFD, ARN: 307760.",
+  keywords: [
+    "nithin finserv terms",
+    "mutual fund distributor terms of use",
+    "MFD terms and conditions",
+    "AMFI MFD terms",
+  ],
+  robots: { index: true, follow: true },
+};
 
 export default function TermsPage() {
   return (

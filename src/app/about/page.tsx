@@ -1,4 +1,25 @@
-export const metadata = { title: "About Nithin Finserv | AMFI Registered MFD | ARN: 307760 | Bengaluru" };
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  alternates: { canonical: "/about" },
+  title: "About Nithin Finserv | AMFI Registered MFD in Bengaluru",
+  description:
+    "Meet Nithin Finserv — your trusted AMFI Registered Mutual Fund Distributor in Bengaluru. Personalised SIP, ELSS, retirement and insurance planning backed by 40+ AMC partnerships.",
+  keywords: [
+    "about nithin finserv",
+    "mutual fund advisor bengaluru",
+    "AMFI registered distributor",
+    "ARN 307760",
+    "financial planner bengaluru",
+    "SIP advisor bengaluru",
+    "trusted mutual fund distributor",
+  ],
+  openGraph: {
+    title: "About Nithin Finserv | AMFI Registered MFD in Bengaluru",
+    description: "AMFI Registered MFD in Bengaluru. Personalised SIP, ELSS, retirement and insurance planning. ARN: 307760.",
+    type: "website",
+  },
+};
 
 export default function AboutPage() {
   return (

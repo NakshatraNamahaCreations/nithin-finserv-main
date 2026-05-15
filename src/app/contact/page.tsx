@@ -5,9 +5,25 @@ import { FaWhatsapp } from "react-icons/fa";
 import ContactForm from "@/components/ContactForm";
 
 export const metadata: Metadata = {
-  title: "Contact Nithin Finserv | Free SIP Consultation | Bengaluru",
+  alternates: { canonical: "/contact" },
+  title: "Contact Nithin Finserv | Free SIP & Mutual Fund Consultation in Bengaluru",
   description:
-    "Reach out to Nithin Finserv — AMFI Registered Mutual Fund Distributor in Bengaluru. Free consultation via call, WhatsApp, or email. ARN: 307760.",
+    "Get in touch with AMFI Registered MFD Nithin Finserv for free SIP planning, ELSS investment advice, retirement planning and insurance consultation in Bengaluru. WhatsApp, call, or email — response within 24 hours. ARN: 307760.",
+  keywords: [
+    "contact mutual fund distributor bengaluru",
+    "free SIP consultation",
+    "mutual fund advisor near me",
+    "Nithin Finserv contact",
+    "ELSS consultation bengaluru",
+    "financial advisor whatsapp",
+    "AMFI MFD contact",
+  ],
+  openGraph: {
+    title: "Contact Nithin Finserv | Free SIP Consultation in Bengaluru",
+    description:
+      "Free SIP, ELSS, retirement and insurance consultation with AMFI Registered MFD Nithin Finserv. ARN: 307760.",
+    type: "website",
+  },
 };
 
 export default function ContactPage() {
