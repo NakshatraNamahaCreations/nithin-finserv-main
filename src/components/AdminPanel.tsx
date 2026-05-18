@@ -2,18 +2,36 @@
 
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
-import {
-  DEFAULT_ADMIN_PASS,
-  loadPosts,
-  loadSettings,
-  savePosts,
-  saveSettings,
-  uniqueSlug,
-  type AdminSettings,
-  type BlogPost,
-} from "@/lib/blog";
 
 type Tab = "new" | "manage" | "seo";
+
+type BlogPost = {
+  _id?: string;
+
+  title: string;
+  slug: string;
+  cat: string;
+  excerpt: string;
+  body: string;
+  emoji: string;
+  readTime: number;
+  image?: string;
+  metaTitle?: string;
+  metaDesc?: string;
+  keywords?: string;
+  date: string;
+};
+
+type AdminSettings = {
+  seoTitle?: string;
+  seoDesc?: string;
+  arn?: string;
+  phone?: string;
+  email?: string;
+  adminPass?: string;
+};
+
+const DEFAULT_ADMIN_PASS = "nithinfinserv2026";
 
 const CATS = [
   "SIP & Investing",
@@ -28,7 +46,7 @@ const CATS = [
   "Beginners Guide",
 ];
 
-type Draft = Omit<BlogPost, "id" | "date" | "slug">;
+type Draft = Omit<BlogPost, "_id" | "date" | "slug">;
 
 const emptyDraft = (): Draft => ({
   title: "",
@@ -72,13 +90,24 @@ export default function AdminPanel() {
   const [settings, setSettings] = useState<AdminSettings>({});
 
   const [draft, setDraft] = useState<Draft>(emptyDraft());
-  const [editingId, setEditingId] = useState<number | null>(null);
+  const [editingId, setEditingId] = useState<string | null>(null);
   const [status, setStatus] = useState("");
 
-  useEffect(() => {
-    setPosts(loadPosts());
-    setSettings(loadSettings());
-  }, []);
+ const fetchBlogs = async () => {
+  try {
+    const res = await fetch("/api/blogs");
+
+    const data = await res.json();
+
+    setPosts(data);
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+useEffect(() => {
+  fetchBlogs();
+}, []);
 
   const tryLogin = () => {
     const stored = settings.adminPass || DEFAULT_ADMIN_PASS;
@@ -95,44 +124,89 @@ export default function AdminPanel() {
     setEditingId(null);
   };
 
-  const publish = () => {
+ const publish = async () => {
+  try {
     if (!draft.title.trim()) {
       setStatus("⚠️ Title is required");
       return;
     }
-    const today = new Date().toLocaleDateString("en-IN", { day: "numeric", month: "short", year: "numeric" });
-    const excerpt = draft.excerpt?.trim() || stripHtml(draft.body).slice(0, 160);
-    const slug = uniqueSlug(draft.title, posts, editingId ?? undefined);
-    const post: BlogPost = {
-      id: editingId ?? Date.now(),
-      slug,
-      date: editingId ? (posts.find((p) => p.id === editingId)?.date ?? today) : today,
+
+    const excerpt =
+      draft.excerpt?.trim() ||
+      stripHtml(draft.body).slice(0, 160);
+
+    const post = {
       ...draft,
       excerpt,
       emoji: draft.emoji || "📰",
-      readTime: Number(draft.readTime) || estimateReadTime(draft.body),
+      readTime:
+        Number(draft.readTime) ||
+        estimateReadTime(draft.body),
     };
 
-    const next = editingId
-      ? posts.map((p) => (p.id === editingId ? post : p))
-      : [post, ...posts];
+    let res;
 
-    setPosts(next);
-    savePosts(next);
+    if (editingId) {
+      res = await fetch(`/api/blogs/${editingId}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(post),
+      });
+    } else {
+      res = await fetch("/api/blogs", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(post),
+      });
+    }
+
+    const data = await res.json();
+
+    if (!res.ok) {
+      setStatus(data.message || "Something went wrong");
+      return;
+    }
+
+    await fetchBlogs();
+
     resetForm();
-    setStatus(editingId ? "✅ Updated!" : "✅ Published!");
-    setTimeout(() => setStatus(""), 3000);
-  };
 
-  const remove = (id: number) => {
+    setStatus(
+      editingId
+        ? "✅ Blog updated!"
+        : "✅ Blog created!"
+    );
+
+    setTimeout(() => {
+      setStatus("");
+    }, 3000);
+  } catch (error) {
+    console.log(error);
+
+    setStatus("❌ Failed");
+  }
+};
+
+  const remove = async (id: string) => {
     if (!confirm("Delete this post?")) return;
-    const next = posts.filter((p) => p.id !== id);
-    setPosts(next);
-    savePosts(next);
+
+try {
+  await fetch(`/api/blogs/${id}`, {
+    method: "DELETE",
+  });
+
+  await fetchBlogs();
+} catch (error) {
+  console.log(error);
+}
   };
 
-  const edit = (id: number) => {
-    const p = posts.find((x) => x.id === id);
+  const edit = (id: string) => {
+    const p = posts.find((x) => x._id === id);
     if (!p) return;
     setDraft({
       title: p.title, cat: p.cat, excerpt: p.excerpt, body: p.body,
@@ -147,7 +221,7 @@ export default function AdminPanel() {
   };
 
   const persistSettings = () => {
-    saveSettings(settings);
+    
     if (settings.seoTitle) document.title = settings.seoTitle;
     setStatus("✅ Saved!");
     setTimeout(() => setStatus(""), 2500);
@@ -205,7 +279,7 @@ export default function AdminPanel() {
                 <p className="text-[13px] text-gray">No posts yet. Create your first post.</p>
               ) : (
                 posts.map((p) => (
-                  <div key={p.id} className="bg-cream rounded-[9px] px-5 py-4 flex items-center justify-between gap-4">
+                  <div key={p._id} className="bg-cream rounded-[9px] px-5 py-4 flex items-center justify-between gap-4">
                     <div className="flex items-center gap-3 min-w-0">
                       {p.image ? (
                         // eslint-disable-next-line @next/next/no-img-element
@@ -219,8 +293,8 @@ export default function AdminPanel() {
                       </div>
                     </div>
                     <div className="flex gap-2 shrink-0">
-                      <button onClick={() => edit(p.id)} className="bg-light text-teal border border-teal text-[11px] px-3 py-1.5 rounded-[5px] cursor-pointer hover:bg-teal hover:text-white transition-colors">Edit</button>
-                      <button onClick={() => remove(p.id)} className="bg-red/10 text-red border border-red/40 text-[11px] px-3 py-1.5 rounded-[5px] cursor-pointer hover:bg-red hover:text-white transition-colors">Delete</button>
+                      <button onClick={() => edit(p._id!)} className="bg-light text-teal border border-teal text-[11px] px-3 py-1.5 rounded-[5px] cursor-pointer hover:bg-teal hover:text-white transition-colors">Edit</button>
+                      <button onClick={() => remove(p._id!)} className="bg-red/10 text-red border border-red/40 text-[11px] px-3 py-1.5 rounded-[5px] cursor-pointer hover:bg-red hover:text-white transition-colors">Delete</button>
                     </div>
                   </div>
                 ))
