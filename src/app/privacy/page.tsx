@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   alternates: { canonical: "/privacy" },
-  title: "Privacy Policy | Nithin Finserv",
+  title: "Privacy Policy",
   description:
-    "How Nithin Finserv collects, uses and protects your personal information. Privacy practices of an AMFI Registered Mutual Fund Distributor in Bengaluru (ARN: 307760).",
+    "How we collect, use and protect your personal information. Privacy practices of an AMFI Registered Mutual Fund Distributor in Bengaluru. ARN: 307760.",
   keywords: [
     "nithin finserv privacy policy",
     "mutual fund distributor privacy",

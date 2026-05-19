@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   alternates: { canonical: "/terms" },
-  title: "Terms & Conditions | Nithin Finserv",
+  title: "Terms & Conditions",
   description:
-    "Terms and conditions for using Nithin Finserv's website and mutual fund distribution services. AMFI Registered MFD, ARN: 307760.",
+    "Terms and conditions for using our website and mutual fund distribution services. AMFI Registered MFD in Bengaluru. ARN: 307760.",
   keywords: [
     "nithin finserv terms",
     "mutual fund distributor terms of use",

@@ -13,11 +13,11 @@ export function generateStaticParams() {
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug } = await params;
   const calc = CALCS.find((c) => c.slug === slug);
-  if (!calc) return { title: "Calculator | Nithin Finserv" };
+  if (!calc) return { title: "Calculator" };
 
   const nameLower = calc.name.toLowerCase();
-  const title = `${calc.name} Online — Free India ${new Date().getFullYear()} | Nithin Finserv`;
-  const description = `${calc.desc} Free online ${nameLower} by AMFI Registered MFD Nithin Finserv (ARN: 307760), Bengaluru. Instant results, mobile-friendly, no signup.`;
+  const title = `${calc.name} — Free Online`;
+  const description = `${calc.desc} Free online tool by an AMFI Registered MFD in Bengaluru. ARN: 307760.`;
 
   return {
     title,
@@ -28,10 +28,8 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
       `${nameLower} online`,
       `${nameLower} india`,
       `free ${nameLower}`,
-      `${nameLower} 2026`,
       "mutual fund calculator",
       "AMFI registered MFD",
-      "nithin finserv calculator",
     ],
     openGraph: {
       title,
@@ -42,7 +40,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     },
     twitter: {
       card: "summary",
-      title: `${calc.name} | Nithin Finserv`,
+      title: `${calc.name} — Free Online`,
       description: calc.desc,
     },
   };

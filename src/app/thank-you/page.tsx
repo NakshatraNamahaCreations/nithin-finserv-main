@@ -5,7 +5,7 @@ import { FaWhatsapp } from "react-icons/fa";
 
 export const metadata: Metadata = {
   alternates: { canonical: "/thank-you" },
-  title: "Thank you · Nithin Finserv",
+  title: "Thank you",
   description: "Thanks for reaching out. We'll be in touch within 24 hours to discuss your investment goals.",
   robots: { index: false, follow: false },
 };

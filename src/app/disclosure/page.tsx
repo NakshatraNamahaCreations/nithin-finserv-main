@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   alternates: { canonical: "/disclosure" },
-  title: "Disclosures | AMFI Registration & Distributor Information | Nithin Finserv",
+  title: "AMFI Disclosures & Distributor Info",
   description:
-    "Mandatory AMFI disclosures from Nithin Finserv, ARN: 307760. Information about mutual fund distributor commissions, conflicts of interest, regulatory status, and SEBI compliance.",
+    "Mandatory AMFI disclosures (ARN: 307760). Distributor commissions, conflicts of interest, regulatory status and SEBI compliance information.",
   keywords: [
     "nithin finserv disclosures",
     "AMFI distributor disclosures",

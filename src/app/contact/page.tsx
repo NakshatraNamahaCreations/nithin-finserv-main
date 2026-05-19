@@ -6,9 +6,9 @@ import ContactForm from "@/components/ContactForm";
 
 export const metadata: Metadata = {
   alternates: { canonical: "/contact" },
-  title: "Contact Nithin Finserv | Free SIP & Mutual Fund Consultation in Bengaluru",
+  title: "Contact — Free SIP Consultation",
   description:
-    "Get in touch with AMFI Registered MFD Nithin Finserv for free SIP planning, ELSS investment advice, retirement planning and insurance consultation in Bengaluru. WhatsApp, call, or email — response within 24 hours. ARN: 307760.",
+    "Free SIP, ELSS, retirement and insurance consultation with an AMFI Registered MFD in Bengaluru. WhatsApp, call or email — reply within 24 hours.",
   keywords: [
     "contact mutual fund distributor bengaluru",
     "free SIP consultation",
@@ -19,9 +19,9 @@ export const metadata: Metadata = {
     "AMFI MFD contact",
   ],
   openGraph: {
-    title: "Contact Nithin Finserv | Free SIP Consultation in Bengaluru",
+    title: "Contact — Free SIP Consultation",
     description:
-      "Free SIP, ELSS, retirement and insurance consultation with AMFI Registered MFD Nithin Finserv. ARN: 307760.",
+      "Free SIP, ELSS, retirement and insurance consultation with an AMFI Registered MFD in Bengaluru. ARN: 307760.",
     type: "website",
   },
 };

@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   alternates: { canonical: "/about" },
-  title: "About Nithin Finserv | AMFI Registered MFD in Bengaluru",
+  title: "About Us | AMFI Registered MFD, Bengaluru",
   description:
-    "Meet Nithin Finserv — your trusted AMFI Registered Mutual Fund Distributor in Bengaluru. Personalised SIP, ELSS, retirement and insurance planning backed by 40+ AMC partnerships.",
+    "Trusted AMFI Registered Mutual Fund Distributor in Bengaluru. Personalised SIP, ELSS, retirement and insurance planning with 40+ AMC partners.",
   keywords: [
     "about nithin finserv",
     "mutual fund advisor bengaluru",
@@ -15,7 +15,7 @@ export const metadata: Metadata = {
     "trusted mutual fund distributor",
   ],
   openGraph: {
-    title: "About Nithin Finserv | AMFI Registered MFD in Bengaluru",
+    title: "About Us | AMFI Registered MFD, Bengaluru",
     description: "AMFI Registered MFD in Bengaluru. Personalised SIP, ELSS, retirement and insurance planning. ARN: 307760.",
     type: "website",
   },

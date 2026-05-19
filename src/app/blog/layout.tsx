@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   alternates: { canonical: "/blog" },
-  title: "Blog | SIP, ELSS, Tax Saving & Investment Insights",
+  title: "Blog — SIP, ELSS & Investment Insights",
   description:
-    "Investment insights, market updates, SIP strategies, tax-saving tips, retirement planning guidance and personal finance articles from AMFI Registered MFD Nithin Finserv, Bengaluru (ARN: 307760).",
+    "Investment insights, SIP strategies, tax-saving tips and retirement planning from an AMFI Registered MFD in Bengaluru. ARN: 307760.",
   keywords: [
     "mutual fund blog india",
     "sip investing tips",
@@ -18,15 +18,15 @@ export const metadata: Metadata = {
     "market update india",
   ],
   openGraph: {
-    title: "Nithin Finserv Blog — Investment Insights & SIP Tips",
+    title: "Blog — Investment Insights & SIP Tips",
     description:
-      "SIP strategies, tax-saving tips, retirement planning and market insights from AMFI Registered MFD Nithin Finserv, Bengaluru.",
+      "SIP strategies, tax-saving tips, retirement planning and market insights from an AMFI Registered MFD in Bengaluru.",
     type: "website",
   },
   twitter: {
     card: "summary",
-    title: "Nithin Finserv Blog — SIP, Tax & Investment Insights",
-    description: "Investment insights and SIP tips from AMFI Registered MFD in Bengaluru.",
+    title: "Blog — SIP, Tax & Investment Insights",
+    description: "Investment insights and SIP tips from an AMFI Registered MFD in Bengaluru.",
   },
 };
 

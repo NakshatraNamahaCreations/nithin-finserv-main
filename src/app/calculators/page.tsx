@@ -3,9 +3,9 @@ import CalculatorsListing from "@/components/CalculatorsListing";
 
 export const metadata: Metadata = {
   alternates: { canonical: "/calculators" },
-  title: "Free Financial Calculators | SIP, EMI, PPF, FD, CAGR & More | Nithin Finserv",
+  title: "20+ Free Financial Calculators Online",
   description:
-    "20+ free online financial calculators for SIP returns, EMI, PPF maturity, FD growth, lumpsum, retirement planning, CAGR, GST and more. Built by AMFI Registered MFD Nithin Finserv (ARN: 307760), Bengaluru.",
+    "20+ free online calculators for SIP, EMI, PPF, FD, lumpsum, retirement, CAGR and GST. Built by an AMFI Registered MFD in Bengaluru. ARN: 307760.",
   keywords: [
     "sip calculator",
     "emi calculator",
@@ -24,16 +24,16 @@ export const metadata: Metadata = {
     "rd calculator",
   ],
   openGraph: {
-    title: "Free Financial Calculators — SIP, EMI, PPF, FD, CAGR & More",
+    title: "20+ Free Financial Calculators Online",
     description:
-      "20+ free online financial calculators built by AMFI Registered MFD Nithin Finserv. SIP, EMI, PPF, FD, lumpsum, retirement, GST, CAGR and more.",
+      "Free online calculators for SIP, EMI, PPF, FD, lumpsum, retirement, GST and CAGR. Built by an AMFI Registered MFD in Bengaluru.",
     type: "website",
     url: "/calculators",
   },
   twitter: {
     card: "summary",
-    title: "Free Financial Calculators | Nithin Finserv",
-    description: "20+ free online calculators for SIP, EMI, PPF, FD, retirement and more.",
+    title: "20+ Free Financial Calculators Online",
+    description: "Free online calculators for SIP, EMI, PPF, FD, retirement and more.",
   },
 };
 
