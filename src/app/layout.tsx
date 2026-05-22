@@ -6,7 +6,7 @@ import Footer from "@/components/Footer";
 import FloatingCTA from "@/components/FloatingCTA";
 import "./globals.css";
 
-// const GA_ID = "G-4RZJWNXD9T";
+const GA_ID = "G-43RE7RE75F";
 
 const playfair = Playfair_Display({ subsets: ["latin"], weight: ["600", "700"], variable: "--font-playfair" });
 const dmSans = DM_Sans({ subsets: ["latin"], weight: ["300", "400", "500", "600"], variable: "--font-dm-sans" });
@@ -63,7 +63,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <Footer />
         <FloatingCTA />
 
-        {/* <Script
+        <Script
           src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`}
           strategy="afterInteractive"
         />
@@ -74,17 +74,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             gtag('js', new Date());
             gtag('config', '${GA_ID}');
           `}
-        </Script> */}
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-43RE7RE75F"></script>
-<script>
-  {`
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-43RE7RE75F');
-  `}
-</script>
+        </Script>
       </body>
     </html>
   );

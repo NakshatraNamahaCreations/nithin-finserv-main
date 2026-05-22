@@ -8,6 +8,11 @@ export function fmt(n: number): string {
   return "₹" + Math.round(n).toLocaleString("en-IN");
 }
 
+export function fmtFull(n: number): string {
+  if (!Number.isFinite(n)) return "₹0";
+  return "₹" + Math.round(n).toLocaleString("en-IN");
+}
+
 export function fmtN(n: number): string {
   if (n >= 10000000) return (n / 10000000).toFixed(2) + " Cr";
   if (n >= 100000) return (n / 100000).toFixed(2) + " L";

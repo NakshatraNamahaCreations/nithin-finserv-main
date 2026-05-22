@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { FiCheck, FiPhone, FiMail } from "react-icons/fi";
-import { FaWhatsapp } from "react-icons/fa";
+import { FaWhatsapp, FaApple, FaGooglePlay } from "react-icons/fa";
 
 export const metadata: Metadata = {
   alternates: { canonical: "/thank-you" },
@@ -87,6 +87,41 @@ export default function ThankYouPage() {
           </ol>
         </div>
 
+        {/* download the app */}
+        <div className="bg-navy rounded-[14px] p-7 max-w-[600px] mx-auto mb-10 text-left">
+          <div className="text-[10px] text-teal font-semibold tracking-[1.5px] uppercase mb-2">While you wait</div>
+          <h2 className="font-serif text-[1.25rem] font-bold text-white mb-2 leading-snug">Download the app</h2>
+          <p className="text-[12.5px] text-white/55 leading-[1.7] mb-5">
+            Track SIPs, view live portfolio performance, and transact anytime — powered by the Wealthy partner platform.
+          </p>
+          <div className="flex flex-wrap gap-3">
+            {/* <a
+              href="https://www.wealthy.in/partners/nithi58604"
+              target="_blank"
+              rel="noreferrer"
+              className="inline-flex items-center gap-2.5 bg-white text-navy hover:bg-light px-4 py-2.5 rounded-[8px] no-underline transition-colors"
+            >
+              <FaApple size={22} />
+              <span className="flex flex-col leading-tight">
+                <span className="text-[9.5px] text-gray uppercase tracking-[0.5px]">Download on the</span>
+                <span className="text-[13px] font-semibold">App Store</span>
+              </span>
+            </a> */}
+            <a
+              href="https://www.wealthy.in/partners/nithi58604"
+              target="_blank"
+              rel="noreferrer"
+              className="inline-flex items-center gap-2.5 bg-white text-navy hover:bg-light px-4 py-2.5 rounded-[8px] no-underline transition-colors"
+            >
+              <FaGooglePlay size={20} />
+              <span className="flex flex-col leading-tight">
+                <span className="text-[9.5px] text-gray uppercase tracking-[0.5px]">Get it on</span>
+                <span className="text-[13px] font-semibold">Google Play</span>
+              </span>
+            </a>
+          </div>
+        </div>
+
         {/* secondary CTAs */}
         <div className="flex flex-wrap gap-3 justify-center mb-8">
           <Link href="/" className="bg-teal hover:bg-teal-2 text-white px-6 py-3 rounded-[8px] text-[13px] font-medium transition-colors no-underline">← Back to home</Link>
@@ -95,7 +130,7 @@ export default function ThankYouPage() {
         </div>
 
         <p className="text-[11px] text-gray leading-[1.7] max-w-[520px] mx-auto">
-          <strong>Mutual Fund investments are subject to market risks.</strong> Read all scheme-related documents carefully before investing. Nithin Finserv — AMFI Registered MFD · ARN-XXXXXX · Bengaluru.
+          <strong>Mutual Fund investments are subject to market risks.</strong> Read all scheme-related documents carefully before investing. Nithin Finserv — AMFI Registered MFD · ARN-307760 · Bengaluru.
         </p>
       </section>
     </div>

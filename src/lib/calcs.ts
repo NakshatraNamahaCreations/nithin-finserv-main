@@ -1,4 +1,4 @@
-import { fmt } from "./utils";
+import { fmt, fmtFull } from "./utils";
 
 export type CalcCategory = "invest" | "legal";
 
@@ -203,7 +203,7 @@ export function runCalc(id: CalcId, v: Record<string, number | string>): CalcRes
       const fv = m * (Math.pow(1 + r, n) - 1) / r * (1 + r);
       const inv = m * n;
       return {
-        kind: "donut", mainLbl: "Total corpus", mainVal: fmt(fv), invested: inv, returns: fv - inv,
+        kind: "donut", mainLbl: "Total corpus", mainVal: fmtFull(fv), invested: inv, returns: fv - inv,
         rows: [
           { l: "Monthly SIP", v: fmt(g("s-m")) },
           { l: "Total invested", v: fmt(inv) },
@@ -217,7 +217,7 @@ export function runCalc(id: CalcId, v: Record<string, number | string>): CalcRes
       const p = g("l-a"), r = g("l-r") / 100, n = g("l-y");
       const fv = p * Math.pow(1 + r, n);
       return {
-        kind: "donut", mainLbl: "Maturity value", mainVal: fmt(fv), invested: p, returns: fv - p,
+        kind: "donut", mainLbl: "Maturity value", mainVal: fmtFull(fv), invested: p, returns: fv - p,
         rows: [
           { l: "Investment", v: fmt(p) },
           { l: "Estimated returns", v: fmt(fv - p), g: true },
@@ -230,7 +230,7 @@ export function runCalc(id: CalcId, v: Record<string, number | string>): CalcRes
       const t = g("gl-t"), r = g("gl-r") / 100, y = g("gl-y");
       const inv = t / Math.pow(1 + r, y);
       return {
-        kind: "donut", mainLbl: "One-time investment needed", mainVal: fmt(inv), invested: inv, returns: t - inv,
+        kind: "donut", mainLbl: "One-time investment needed", mainVal: fmtFull(inv), invested: inv, returns: t - inv,
         rows: [
           { l: "Target amount", v: fmt(t) },
           { l: "Invest today", v: fmt(inv), g: true },
@@ -243,7 +243,7 @@ export function runCalc(id: CalcId, v: Record<string, number | string>): CalcRes
       const t = g("gs-t"), r = g("gs-r") / 100 / 12, n = g("gs-y") * 12;
       const sip = t * r / (Math.pow(1 + r, n) - 1) / (1 + r);
       return {
-        kind: "donut", mainLbl: "Monthly SIP needed", mainVal: fmt(sip), invested: sip * n, returns: t - sip * n,
+        kind: "donut", mainLbl: "Monthly SIP needed", mainVal: fmtFull(sip), invested: sip * n, returns: t - sip * n,
         rows: [
           { l: "Target amount", v: fmt(t) },
           { l: "Monthly SIP needed", v: fmt(sip), g: true },
@@ -289,7 +289,7 @@ export function runCalc(id: CalcId, v: Record<string, number | string>): CalcRes
       const sipR = rr / 12; const n = yrs * 12;
       const sip = corpus * sipR / (Math.pow(1 + sipR, n) - 1);
       return {
-        kind: "donut", mainLbl: "Corpus needed at retirement", mainVal: fmt(corpus), invested: sip * n, returns: corpus - sip * n,
+        kind: "donut", mainLbl: "Corpus needed at retirement", mainVal: fmtFull(corpus), invested: sip * n, returns: corpus - sip * n,
         rows: [
           { l: "Years to retirement", v: yrs + " yrs" },
           { l: "Monthly expenses then", v: fmt(futMon) },
@@ -306,7 +306,7 @@ export function runCalc(id: CalcId, v: Record<string, number | string>): CalcRes
       const r12 = r / 12, n = y * 12;
       const corpus = rec * (Math.pow(1 + r12, n) - 1) / r12 * (1 + r12);
       return {
-        kind: "donut", mainLbl: "Projected corpus", mainVal: fmt(corpus), invested: rec * n, returns: corpus - rec * n,
+        kind: "donut", mainLbl: "Projected corpus", mainVal: fmtFull(corpus), invested: rec * n, returns: corpus - rec * n,
         rows: [
           { l: "Monthly salary", v: fmt(sal) },
           { l: "Recommended to invest", v: Math.round(recPct) + "% = " + fmt(rec), g: true },
@@ -336,7 +336,7 @@ export function runCalc(id: CalcId, v: Record<string, number | string>): CalcRes
       const r12 = r / 12, n = y * 12;
       const sip = future * r12 / (Math.pow(1 + r12, n) - 1);
       return {
-        kind: "donut", mainLbl: "Future education cost", mainVal: fmt(future), invested: sip * n, returns: future - sip * n,
+        kind: "donut", mainLbl: "Future education cost", mainVal: fmtFull(future), invested: sip * n, returns: future - sip * n,
         rows: [
           { l: "Current cost", v: fmt(c) },
           { l: "Future cost (" + y + " yrs)", v: fmt(future), g: true },
@@ -355,7 +355,7 @@ export function runCalc(id: CalcId, v: Record<string, number | string>): CalcRes
         monthly *= 1 + su;
       }
       return {
-        kind: "donut", mainLbl: "Total corpus", mainVal: fmt(total), invested, returns: total - invested,
+        kind: "donut", mainLbl: "Total corpus", mainVal: fmtFull(total), invested, returns: total - invested,
         rows: [
           { l: "Starting SIP", v: fmt(m) + "/mo" },
           { l: "Final SIP (yr " + y + ")", v: fmt(m * Math.pow(1 + su, y - 1)) + "/mo" },
@@ -387,7 +387,7 @@ export function runCalc(id: CalcId, v: Record<string, number | string>): CalcRes
       const emi = p * r * Math.pow(1 + r, n) / (Math.pow(1 + r, n) - 1);
       const total = emi * n;
       return {
-        kind: "donut", mainLbl: "Monthly EMI", mainVal: fmt(emi), invested: p, returns: total - p,
+        kind: "donut", mainLbl: "Monthly EMI", mainVal: fmtFull(emi), invested: p, returns: total - p,
         rows: [
           { l: "Loan amount", v: fmt(p) }, { l: "Monthly EMI", v: fmt(emi), g: true },
           { l: "Total interest", v: fmt(total - p) }, { l: "Total payment", v: fmt(total) },
@@ -414,7 +414,7 @@ export function runCalc(id: CalcId, v: Record<string, number | string>): CalcRes
       const a = g("ppf-a"), r = g("ppf-r") / 100, y = g("ppf-y");
       const fv = a * ((Math.pow(1 + r, y) - 1) / r) * (1 + r);
       return {
-        kind: "donut", mainLbl: "PPF maturity amount", mainVal: fmt(fv), invested: a * y, returns: fv - a * y,
+        kind: "donut", mainLbl: "PPF maturity amount", mainVal: fmtFull(fv), invested: a * y, returns: fv - a * y,
         rows: [
           { l: "Annual contribution", v: fmt(a) },
           { l: "Total invested (" + y + " yrs)", v: fmt(a * y) },
@@ -428,7 +428,7 @@ export function runCalc(id: CalcId, v: Record<string, number | string>): CalcRes
       const p = g("fd-a"), r = g("fd-r") / 100, y = g("fd-y");
       const fv = p * Math.pow(1 + r / 4, 4 * y);
       return {
-        kind: "donut", mainLbl: "FD maturity value", mainVal: fmt(fv), invested: p, returns: fv - p,
+        kind: "donut", mainLbl: "FD maturity value", mainVal: fmtFull(fv), invested: p, returns: fv - p,
         rows: [
           { l: "Principal", v: fmt(p) },
           { l: "Interest earned", v: fmt(fv - p), g: true },
@@ -441,7 +441,7 @@ export function runCalc(id: CalcId, v: Record<string, number | string>): CalcRes
       const m = g("rd-m"), r = g("rd-r") / 100 / 12, n = g("rd-y") * 12;
       const fv = m * (Math.pow(1 + r, n) - 1) / r * (1 + r);
       return {
-        kind: "donut", mainLbl: "RD maturity value", mainVal: fmt(fv), invested: m * n, returns: fv - m * n,
+        kind: "donut", mainLbl: "RD maturity value", mainVal: fmtFull(fv), invested: m * n, returns: fv - m * n,
         rows: [
           { l: "Monthly deposit", v: fmt(m) }, { l: "Total deposited", v: fmt(m * n) },
           { l: "Interest earned", v: fmt(fv - m * n), g: true },
@@ -454,7 +454,7 @@ export function runCalc(id: CalcId, v: Record<string, number | string>): CalcRes
       const p = g("ci-p"), r = g("ci-r") / 100, y = g("ci-y"), f = g("ci-freq") || 1;
       const fv = p * Math.pow(1 + r / f, f * y);
       return {
-        kind: "donut", mainLbl: "Maturity value", mainVal: fmt(fv), invested: p, returns: fv - p,
+        kind: "donut", mainLbl: "Maturity value", mainVal: fmtFull(fv), invested: p, returns: fv - p,
         rows: [
           { l: "Principal", v: fmt(p) }, { l: "Rate", v: g("ci-r") + "% p.a." },
           { l: "Compound interest", v: fmt(fv - p), g: true },
