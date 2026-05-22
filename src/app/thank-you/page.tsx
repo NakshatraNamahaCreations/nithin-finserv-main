@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { FiCheck, FiPhone, FiMail } from "react-icons/fi";
-import { FaWhatsapp, FaApple, FaGooglePlay } from "react-icons/fa";
+import { FaGooglePlay, FaApple, FaPhoneAlt, FaMobileAlt } from "react-icons/fa";
+import { FaPhoneFlip } from "react-icons/fa6";
 
 export const metadata: Metadata = {
   alternates: { canonical: "/thank-you" },
@@ -39,8 +40,22 @@ export default function ThankYouPage() {
         </p>
 
         {/* quick actions */}
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 max-w-[640px] mx-auto mb-12">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 max-w-[760px] mx-auto mb-12">
+    
           <a
+            href="https://www.wealthy.in/partners/nithi58604"
+            target="_blank"
+            rel="noreferrer"
+            className="bg-white border border-border rounded-[12px] px-5 py-4 flex flex-col items-center gap-2 hover:border-teal hover:-translate-y-0.5 transition-all no-underline group"
+          >
+            <div className="w-10 h-10 rounded-full bg-light text-teal flex items-center justify-center">
+              <FaMobileAlt size={18} />
+            </div>
+            <div className="text-[11.5px] uppercase tracking-[1px] text-gray">Get the App</div>
+            <div className="text-[13px] font-semibold text-navy group-hover:text-teal">Download App</div>
+          </a>
+
+           <a
             href="tel:+919060186197"
             className="bg-white border border-border rounded-[12px] px-5 py-4 flex flex-col items-center gap-2 hover:border-teal hover:-translate-y-0.5 transition-all no-underline group"
           >
@@ -49,19 +64,6 @@ export default function ThankYouPage() {
             </div>
             <div className="text-[11.5px] uppercase tracking-[1px] text-gray">Call directly</div>
             <div className="text-[13px] font-semibold text-navy group-hover:text-teal">+91 90601 86197</div>
-          </a>
-
-          <a
-            href="https://wa.me/919060186197?text=Hi%20Nithin%20Finserv%2C%20I%20just%20submitted%20the%20consultation%20form."
-            target="_blank"
-            rel="noreferrer"
-            className="bg-white border border-border rounded-[12px] px-5 py-4 flex flex-col items-center gap-2 hover:border-teal hover:-translate-y-0.5 transition-all no-underline group"
-          >
-            <div className="w-10 h-10 rounded-full bg-[#e8f8ef] text-[#25D366] flex items-center justify-center">
-              <FaWhatsapp size={20} />
-            </div>
-            <div className="text-[11.5px] uppercase tracking-[1px] text-gray">Chat now</div>
-            <div className="text-[13px] font-semibold text-navy group-hover:text-teal">WhatsApp us</div>
           </a>
 
           <a
@@ -85,41 +87,6 @@ export default function ThankYouPage() {
             <Step n="3" text="If it&apos;s a fit, we share a personalised fund shortlist — no obligation to invest." />
             <Step n="4" text="Once you decide, we help with 100% paperless digital KYC via the Wealthy platform." />
           </ol>
-        </div>
-
-        {/* download the app */}
-        <div className="bg-navy rounded-[14px] p-7 max-w-[600px] mx-auto mb-10 text-left">
-          <div className="text-[10px] text-teal font-semibold tracking-[1.5px] uppercase mb-2">While you wait</div>
-          <h2 className="font-serif text-[1.25rem] font-bold text-white mb-2 leading-snug">Download the app</h2>
-          <p className="text-[12.5px] text-white/55 leading-[1.7] mb-5">
-            Track SIPs, view live portfolio performance, and transact anytime — powered by the Wealthy partner platform.
-          </p>
-          <div className="flex flex-wrap gap-3">
-            {/* <a
-              href="https://www.wealthy.in/partners/nithi58604"
-              target="_blank"
-              rel="noreferrer"
-              className="inline-flex items-center gap-2.5 bg-white text-navy hover:bg-light px-4 py-2.5 rounded-[8px] no-underline transition-colors"
-            >
-              <FaApple size={22} />
-              <span className="flex flex-col leading-tight">
-                <span className="text-[9.5px] text-gray uppercase tracking-[0.5px]">Download on the</span>
-                <span className="text-[13px] font-semibold">App Store</span>
-              </span>
-            </a> */}
-            <a
-              href="https://www.wealthy.in/partners/nithi58604"
-              target="_blank"
-              rel="noreferrer"
-              className="inline-flex items-center gap-2.5 bg-white text-navy hover:bg-light px-4 py-2.5 rounded-[8px] no-underline transition-colors"
-            >
-              <FaGooglePlay size={20} />
-              <span className="flex flex-col leading-tight">
-                <span className="text-[9.5px] text-gray uppercase tracking-[0.5px]">Get it on</span>
-                <span className="text-[13px] font-semibold">Google Play</span>
-              </span>
-            </a>
-          </div>
         </div>
 
         {/* secondary CTAs */}
