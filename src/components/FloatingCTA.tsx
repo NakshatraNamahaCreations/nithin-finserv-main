@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 export default function FloatingCTA() {
   const pathname = usePathname();
   if (pathname?.startsWith("/admin")) return null;
+  if (pathname?.startsWith("/blog")) return null;
 
   return (
     <>
